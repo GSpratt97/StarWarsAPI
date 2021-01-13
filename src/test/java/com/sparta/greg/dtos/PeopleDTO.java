@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,74 +11,145 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "count",
-        "next",
-        "previous",
-        "results"
+        "name",
+        "height",
+        "mass",
+        "hair_color",
+        "skin_color",
+        "eye_color",
+        "birth_year",
+        "gender",
+        "homeworld",
+        "films",
+        "species",
+        "vehicles",
+        "starships",
+        "created",
+        "edited",
+        "url"
 })
+public class PeopleDTO extends StarWarsDTO{
+    public PeopleDTO(){}
 
-public class PeopleDTO {
-
-    @JsonProperty("count")
-    private int count;
-    @JsonProperty("next")
-    private String next;
-    @JsonProperty("previous")
-    private Object previous;
-    @JsonProperty("results")
-    private List<PeopleResultDTO> results = null;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("height")
+    private String height;
+    @JsonProperty("mass")
+    private String mass;
+    @JsonProperty("hair_color")
+    private String hairColor;
+    @JsonProperty("skin_color")
+    private String skinColor;
+    @JsonProperty("eye_color")
+    private String eyeColor;
+    @JsonProperty("birth_year")
+    private String birthYear;
+    @JsonProperty("gender")
+    private String gender;
+    @JsonProperty("homeworld")
+    private String homeworld;
+    @JsonProperty("films")
+    private List<String> films = null;
+    @JsonProperty("species")
+    private List<String> species = null;
+    @JsonProperty("vehicles")
+    private List<String> vehicles = null;
+    @JsonProperty("starships")
+    private List<String> starships = null;
+    @JsonProperty("created")
+    private String created;
+    @JsonProperty("edited")
+    private String edited;
+    @JsonProperty("url")
+    private String url;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("count")
-    public int getCount() {
-        return count;
+    @JsonProperty("name")
+    public String getName() {
+        return name;
     }
 
-    @JsonProperty("count")
-    public void setCount(int count) {
-        this.count = count;
+
+    @JsonProperty("height")
+    public String getHeight() {
+        return height;
     }
 
-    @JsonProperty("next")
-    public String getNext() {
-        return next;
+
+    @JsonProperty("mass")
+    public String getMass() {
+        return mass;
     }
 
-    @JsonProperty("next")
-    public void setNext(String next) {
-        this.next = next;
+    @JsonProperty("hair_color")
+    public String getHairColor() {
+        return hairColor;
     }
 
-    @JsonProperty("previous")
-    public Object getPrevious() {
-        return previous;
+    @JsonProperty("skin_color")
+    public String getSkinColor() {
+        return skinColor;
     }
 
-    @JsonProperty("previous")
-    public void setPrevious(Object previous) {
-        this.previous = previous;
+    @JsonProperty("eye_color")
+    public String getEyeColor() {
+        return eyeColor;
     }
 
-    @JsonProperty("results")
-    public List<PeopleResultDTO> getResults() {
-        return results;
+    @JsonProperty("birth_year")
+    public String getBirthYear() {
+        return birthYear;
     }
 
-    @JsonProperty("results")
-    public void setResults(List<PeopleResultDTO> results) {
-        this.results = results;
+    @JsonProperty("gender")
+    public String getGender() {
+        return gender;
+    }
+
+    @JsonProperty("homeworld")
+    public String getHomeworld() {
+        return homeworld;
+    }
+
+    @JsonProperty("films")
+    public List<String> getFilms() {
+        return films;
+    }
+
+    @JsonProperty("species")
+    public List<String> getSpecies() {
+        return species;
+    }
+
+    @JsonProperty("vehicles")
+    public List<String> getVehicles() {
+        return vehicles;
+    }
+
+    @JsonProperty("starships")
+    public List<String> getStarships() {
+        return starships;
+    }
+
+    @JsonProperty("created")
+    public String getCreated() {
+        return created;
+    }
+
+    @JsonProperty("edited")
+    public String getEdited() {
+        return edited;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
     }
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
 }
-
