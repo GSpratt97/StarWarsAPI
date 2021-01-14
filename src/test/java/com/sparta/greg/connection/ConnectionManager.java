@@ -1,4 +1,4 @@
-package com.sparta.greg;
+package com.sparta.greg.connection;
 
 import com.sparta.greg.dtos.PeopleDTO;
 

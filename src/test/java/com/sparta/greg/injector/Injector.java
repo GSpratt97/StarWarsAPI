@@ -1,4 +1,4 @@
-package com.sparta.greg;
+package com.sparta.greg.injector;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.greg.dtos.*;

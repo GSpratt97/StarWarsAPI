@@ -17,7 +17,6 @@ public abstract class StarWarsDTO {
     private String URL;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
     public String getCreated() {
         return created;
     }
@@ -48,5 +47,15 @@ public abstract class StarWarsDTO {
 
     public void setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
+    }
+
+    public String httpToHttps(String urlString) {
+        if (urlString.charAt(4) != 's') {
+            return urlString.substring(0, 4) + 's' + urlString.substring(4);
+        } else {
+            return urlString;
+        }
+
+
     }
 }

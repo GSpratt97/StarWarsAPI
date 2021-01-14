@@ -1,5 +1,6 @@
 package com.sparta.greg.dtos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.sparta.greg.injector.Injector;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -152,4 +154,46 @@ public class PeopleDTO extends StarWarsDTO{
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
+
+    public PlanetsDTO getHomeWorld() {
+        return (PlanetsDTO) Injector.injectDTO(httpToHttps(homeworld));
+    }
+
+    public List<FilmsDTO> getFilmsCharacterIsIn() {
+        List<FilmsDTO> listOfFilms = new ArrayList<>();
+        for (String film:films) {
+            listOfFilms.add((FilmsDTO) Injector.injectDTO(httpToHttps(film)));
+        }
+        return listOfFilms;
+    }
+
+    public List<SpeciesDTO> getCharacterSpecies() {
+        List<SpeciesDTO> listOfSpecies = new ArrayList<>();
+        for (String species1:species) {
+            listOfSpecies.add((SpeciesDTO) Injector.injectDTO(httpToHttps(species1)));
+        }
+        return listOfSpecies;
+    }
+
+    public List<VehiclesDTO> getVehiclesCharacterIsIn() {
+        List<VehiclesDTO> listOfVehicles = new ArrayList<>();
+        for (String vehicle:vehicles) {
+            listOfVehicles.add((VehiclesDTO) Injector.injectDTO(httpToHttps(vehicle)));
+        }
+        return listOfVehicles;
+    }
+
+    public List<StarshipsDTO> getStarshipsCharacterIsIn() {
+        List<StarshipsDTO> listOfStarships = new ArrayList<>();
+        for (String starship:starships) {
+            listOfStarships.add((StarshipsDTO) Injector.injectDTO(httpToHttps(starship)));
+        }
+        return listOfStarships;
+    }
+
+
+
+
+
+
 }
