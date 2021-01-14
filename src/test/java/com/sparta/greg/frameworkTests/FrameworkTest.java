@@ -2,9 +2,7 @@ package com.sparta.greg.frameworkTests;
 
 import com.sparta.greg.ConnectionManager;
 import com.sparta.greg.Injector;
-import com.sparta.greg.dtos.PeopleDTO;
-import com.sparta.greg.dtos.PlanetsDTO;
-import com.sparta.greg.dtos.StarWarsDTO;
+import com.sparta.greg.dtos.*;
 import org.junit.jupiter.api.*;
 
 
@@ -12,17 +10,37 @@ import org.junit.jupiter.api.*;
 public class FrameworkTest {
 //    PeopleDTO peopleDTO;
 //    PlanetsDTO planetsDTO;
+    FilmsDTO filmsDTO;
     PeopleDTO peopleDTO;
+    PlanetsDTO planetsDTO;
+    SpeciesDTO speciesDTO;
+    StarshipsDTO starshipsDTO;
+    VehiclesDTO vehiclesDTO;
+
+    private static final String FILMS = "films/";
+    private static final String PEOPLE = "people/";
+    private static final String PLANETS = "planets/";
+    private static final String SPECIES = "species/";
+    private static final String STARSHIPS = "starships/";
+    private static final String VEHICLES = "vehicles/";
+
+    private static final String CATEGORY = "people/";
+    private static final String ID = "1/";
 
     @BeforeEach
     void setup() {
-        peopleDTO = Injector.injectDTO(ConnectionManager.getConnection());
+        filmsDTO = (FilmsDTO) Injector.injectDTO(ConnectionManager.getConnection(FILMS,ID));
+        peopleDTO = (PeopleDTO) Injector.injectDTO(ConnectionManager.getConnection(PEOPLE,ID));
+        planetsDTO = (PlanetsDTO) Injector.injectDTO(ConnectionManager.getConnection(PLANETS,ID));
+        speciesDTO = (SpeciesDTO) Injector.injectDTO(ConnectionManager.getConnection(SPECIES,ID));
+        starshipsDTO = (StarshipsDTO) Injector.injectDTO(ConnectionManager.getConnection(STARSHIPS,ID));
+        vehiclesDTO = (VehiclesDTO) Injector.injectDTO(ConnectionManager.getConnection(VEHICLES,ID));
     }
 
     @Test
     @DisplayName("Status code is 200")
     void statusCodeIs200() {
-        Assertions.assertEquals(200, ConnectionManager.getStatusCode());
+        Assertions.assertEquals(200, ConnectionManager.getStatusCode(FILMS,ID));
     }
 
     @Test

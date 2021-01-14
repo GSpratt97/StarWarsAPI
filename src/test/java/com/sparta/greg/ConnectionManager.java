@@ -9,28 +9,25 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class ConnectionManager {
-    private static final String BASE_URL = "https://swapi.dev/api/people/1/";
-    private static final String PEOPLE = "";
-    private static String endPoint;
-    private String URL;
+    private static final String BASE_URL = "https://swapi.dev/api/";
     private static HttpResponse<String> httpResponse;
 
-    public static String getConnection() {
-        return BASE_URL;
+    public static String getConnection(String category, String id) {
+        return BASE_URL + category + id;
     }
 
     public String getConnectionWithKey(String key) {
         return BASE_URL + "?key=" + key;
     }
 
-    public static int getStatusCode() {
+    public static int getStatusCode(String category, String id) {
         HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(BASE_URL)).build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(BASE_URL + category + id)).build();
         int statusCode = 0;
         try {
             httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             statusCode = httpResponse.statusCode();
-            System.out.println(httpResponse.body());
+//            System.out.println(httpResponse.body());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -38,7 +35,7 @@ public class ConnectionManager {
     }
 
     public String getURL() {
-        return BASE_URL + endPoint;
+        return BASE_URL;
     }
 
     public static HttpResponse<String> getHttpResponse() {
