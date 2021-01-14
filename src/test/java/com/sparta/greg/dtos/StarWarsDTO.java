@@ -55,7 +55,5 @@ public abstract class StarWarsDTO {
         } else {
             return urlString;
         }
-
-
     }
 }

@@ -1,14 +1,16 @@
 package com.sparta.greg.dtos;
 
+import java.awt.event.PaintEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.sparta.greg.injector.Injector;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -66,19 +68,9 @@ public class FilmsDTO extends StarWarsDTO {
         return title;
     }
 
-    @JsonProperty("title")
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     @JsonProperty("episode_id")
     public int getEpisodeId() {
         return episodeId;
-    }
-
-    @JsonProperty("episode_id")
-    public void setEpisodeId(int episodeId) {
-        this.episodeId = episodeId;
     }
 
     @JsonProperty("opening_crawl")
@@ -86,19 +78,9 @@ public class FilmsDTO extends StarWarsDTO {
         return openingCrawl;
     }
 
-    @JsonProperty("opening_crawl")
-    public void setOpeningCrawl(String openingCrawl) {
-        this.openingCrawl = openingCrawl;
-    }
-
     @JsonProperty("director")
     public String getDirector() {
         return director;
-    }
-
-    @JsonProperty("director")
-    public void setDirector(String director) {
-        this.director = director;
     }
 
     @JsonProperty("producer")
@@ -106,19 +88,9 @@ public class FilmsDTO extends StarWarsDTO {
         return producer;
     }
 
-    @JsonProperty("producer")
-    public void setProducer(String producer) {
-        this.producer = producer;
-    }
-
     @JsonProperty("release_date")
     public String getReleaseDate() {
         return releaseDate;
-    }
-
-    @JsonProperty("release_date")
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
     }
 
     @JsonProperty("characters")
@@ -126,19 +98,9 @@ public class FilmsDTO extends StarWarsDTO {
         return characters;
     }
 
-    @JsonProperty("characters")
-    public void setCharacters(List<String> characters) {
-        this.characters = characters;
-    }
-
     @JsonProperty("planets")
     public List<String> getPlanets() {
         return planets;
-    }
-
-    @JsonProperty("planets")
-    public void setPlanets(List<String> planets) {
-        this.planets = planets;
     }
 
     @JsonProperty("starships")
@@ -146,19 +108,9 @@ public class FilmsDTO extends StarWarsDTO {
         return starships;
     }
 
-    @JsonProperty("starships")
-    public void setStarships(List<String> starships) {
-        this.starships = starships;
-    }
-
     @JsonProperty("vehicles")
     public List<String> getVehicles() {
         return vehicles;
-    }
-
-    @JsonProperty("vehicles")
-    public void setVehicles(List<String> vehicles) {
-        this.vehicles = vehicles;
     }
 
     @JsonProperty("species")
@@ -166,19 +118,9 @@ public class FilmsDTO extends StarWarsDTO {
         return species;
     }
 
-    @JsonProperty("species")
-    public void setSpecies(List<String> species) {
-        this.species = species;
-    }
-
     @JsonProperty("created")
     public String getCreated() {
         return created;
-    }
-
-    @JsonProperty("created")
-    public void setCreated(String created) {
-        this.created = created;
     }
 
     @JsonProperty("edited")
@@ -186,19 +128,9 @@ public class FilmsDTO extends StarWarsDTO {
         return edited;
     }
 
-    @JsonProperty("edited")
-    public void setEdited(String edited) {
-        this.edited = edited;
-    }
-
     @JsonProperty("url")
     public String getUrl() {
         return url;
-    }
-
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     @JsonAnyGetter
@@ -206,9 +138,45 @@ public class FilmsDTO extends StarWarsDTO {
         return this.additionalProperties;
     }
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    public List<PeopleDTO> getCharactersInFilm() {
+        List<PeopleDTO> listOfCharacters = new ArrayList<>();
+        for (String character:characters) {
+            listOfCharacters.add((PeopleDTO) Injector.injectDTO(httpToHttps(character)));
+        }
+        return listOfCharacters;
     }
+
+    public List<PlanetsDTO> getPlanetsInFilm() {
+        List<PlanetsDTO> listOfPlanets = new ArrayList<>();
+        for (String planet:planets) {
+            listOfPlanets.add((PlanetsDTO) Injector.injectDTO(httpToHttps(planet)));
+        }
+        return listOfPlanets;
+    }
+
+    public List<StarshipsDTO> getStarshipsInFilm() {
+        List<StarshipsDTO> listOfStarships = new ArrayList<>();
+        for (String starship:starships) {
+            listOfStarships.add((StarshipsDTO) Injector.injectDTO(httpToHttps(starship)));
+        }
+        return listOfStarships;
+    }
+
+    public List<VehiclesDTO> getVehiclesInFilm() {
+        List<VehiclesDTO> listOfVehicles = new ArrayList<>();
+        for (String vehicle:vehicles) {
+            listOfVehicles.add((VehiclesDTO) Injector.injectDTO(httpToHttps(vehicle)));
+        }
+        return listOfVehicles;
+    }
+
+    public List<SpeciesDTO> getSpeciesInFilm() {
+        List<SpeciesDTO> listOfSpecies = new ArrayList<>();
+        for (String species1:species) {
+            listOfSpecies.add((SpeciesDTO) Injector.injectDTO(httpToHttps(species1)));
+        }
+        return listOfSpecies;
+    }
+
 
 }
