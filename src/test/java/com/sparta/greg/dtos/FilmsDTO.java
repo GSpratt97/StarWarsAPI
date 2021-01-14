@@ -1,6 +1,5 @@
 package com.sparta.greg.dtos;
 
-import java.awt.event.PaintEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -126,11 +125,6 @@ public class FilmsDTO extends StarWarsDTO {
     @JsonProperty("edited")
     public String getEdited() {
         return edited;
-    }
-
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
     }
 
     @JsonAnyGetter

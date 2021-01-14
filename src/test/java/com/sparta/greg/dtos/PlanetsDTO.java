@@ -129,7 +129,7 @@ public class PlanetsDTO extends StarWarsDTO{
 
     @JsonProperty("url")
     public String getUrl() {
-        return url;
+        return httpToHttps(url);
     }
 
     @JsonAnyGetter

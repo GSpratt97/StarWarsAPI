@@ -147,7 +147,7 @@ public class PeopleDTO extends StarWarsDTO{
 
     @JsonProperty("url")
     public String getUrl() {
-        return url;
+        return httpToHttps(url);
     }
 
     @JsonAnyGetter
@@ -175,7 +175,7 @@ public class PeopleDTO extends StarWarsDTO{
         return listOfSpecies;
     }
 
-    public List<VehiclesDTO> getVehiclesCharacterIsIn() {
+    public List<VehiclesDTO> getVehiclesCharacterUses() {
         List<VehiclesDTO> listOfVehicles = new ArrayList<>();
         for (String vehicle:vehicles) {
             listOfVehicles.add((VehiclesDTO) Injector.injectDTO(httpToHttps(vehicle)));
@@ -183,7 +183,7 @@ public class PeopleDTO extends StarWarsDTO{
         return listOfVehicles;
     }
 
-    public List<StarshipsDTO> getStarshipsCharacterIsIn() {
+    public List<StarshipsDTO> getStarshipsCharacterUses() {
         List<StarshipsDTO> listOfStarships = new ArrayList<>();
         for (String starship:starships) {
             listOfStarships.add((StarshipsDTO) Injector.injectDTO(httpToHttps(starship)));

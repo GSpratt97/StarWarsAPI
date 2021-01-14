@@ -13,8 +13,6 @@ public class FactoryDTO {
     private static final String STARSHIPS = "starships/";
     private static final String VEHICLES = "vehicles/";
 
-    private static final String CATEGORY = "people/";
-//    private static final String ID = "1/";
     private static final String ID = ".*[0-9]/";
 
     public static StarWarsDTO starWarsFactory(String url) {
@@ -33,22 +31,6 @@ public class FactoryDTO {
         } else {
             return null;
         }
-
-//        switch (url) {
-//            case BASE_URL + FILMS + ID:
-//                return new FilmsDTO();
-//            case BASE_URL + PEOPLE + ID:
-//                return new PeopleDTO();
-//            case BASE_URL + PLANETS + ID:
-//                return new PlanetsDTO();
-//            case BASE_URL + SPECIES + ID:
-//                return new SpeciesDTO();
-//            case BASE_URL + STARSHIPS + ID:
-//                return new StarshipsDTO();
-//            case BASE_URL + VEHICLES + ID:
-//                return new VehiclesDTO();
-//        }
-//        return null;
     }
 }
 

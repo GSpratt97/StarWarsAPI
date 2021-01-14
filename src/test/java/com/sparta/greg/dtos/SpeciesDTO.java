@@ -1,14 +1,15 @@
 package com.sparta.greg.dtos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.sparta.greg.injector.Injector;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -69,19 +70,9 @@ public class SpeciesDTO extends StarWarsDTO {
         return name;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @JsonProperty("classification")
     public String getClassification() {
         return classification;
-    }
-
-    @JsonProperty("classification")
-    public void setClassification(String classification) {
-        this.classification = classification;
     }
 
     @JsonProperty("designation")
@@ -89,19 +80,9 @@ public class SpeciesDTO extends StarWarsDTO {
         return designation;
     }
 
-    @JsonProperty("designation")
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
     @JsonProperty("average_height")
     public String getAverageHeight() {
         return averageHeight;
-    }
-
-    @JsonProperty("average_height")
-    public void setAverageHeight(String averageHeight) {
-        this.averageHeight = averageHeight;
     }
 
     @JsonProperty("skin_colors")
@@ -109,19 +90,9 @@ public class SpeciesDTO extends StarWarsDTO {
         return skinColors;
     }
 
-    @JsonProperty("skin_colors")
-    public void setSkinColors(String skinColors) {
-        this.skinColors = skinColors;
-    }
-
     @JsonProperty("hair_colors")
     public String getHairColors() {
         return hairColors;
-    }
-
-    @JsonProperty("hair_colors")
-    public void setHairColors(String hairColors) {
-        this.hairColors = hairColors;
     }
 
     @JsonProperty("eye_colors")
@@ -129,19 +100,9 @@ public class SpeciesDTO extends StarWarsDTO {
         return eyeColors;
     }
 
-    @JsonProperty("eye_colors")
-    public void setEyeColors(String eyeColors) {
-        this.eyeColors = eyeColors;
-    }
-
     @JsonProperty("average_lifespan")
     public String getAverageLifespan() {
         return averageLifespan;
-    }
-
-    @JsonProperty("average_lifespan")
-    public void setAverageLifespan(String averageLifespan) {
-        this.averageLifespan = averageLifespan;
     }
 
     @JsonProperty("homeworld")
@@ -149,19 +110,9 @@ public class SpeciesDTO extends StarWarsDTO {
         return homeworld;
     }
 
-    @JsonProperty("homeworld")
-    public void setHomeworld(String homeworld) {
-        this.homeworld = homeworld;
-    }
-
     @JsonProperty("language")
     public String getLanguage() {
         return language;
-    }
-
-    @JsonProperty("language")
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     @JsonProperty("people")
@@ -169,19 +120,9 @@ public class SpeciesDTO extends StarWarsDTO {
         return people;
     }
 
-    @JsonProperty("people")
-    public void setPeople(List<String> people) {
-        this.people = people;
-    }
-
     @JsonProperty("films")
     public List<String> getFilms() {
         return films;
-    }
-
-    @JsonProperty("films")
-    public void setFilms(List<String> films) {
-        this.films = films;
     }
 
     @JsonProperty("created")
@@ -189,29 +130,14 @@ public class SpeciesDTO extends StarWarsDTO {
         return created;
     }
 
-    @JsonProperty("created")
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
     @JsonProperty("edited")
     public String getEdited() {
         return edited;
     }
 
-    @JsonProperty("edited")
-    public void setEdited(String edited) {
-        this.edited = edited;
-    }
-
     @JsonProperty("url")
     public String getUrl() {
-        return url;
-    }
-
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
+        return httpToHttps(url);
     }
 
     @JsonAnyGetter
@@ -219,9 +145,23 @@ public class SpeciesDTO extends StarWarsDTO {
         return this.additionalProperties;
     }
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    public PlanetsDTO getSpeciesHomeWorld() {
+        return (PlanetsDTO) Injector.injectDTO(httpToHttps(homeworld));
     }
 
+    public List<PeopleDTO> getCharactersOfSpecies() {
+        List<PeopleDTO> listOfCharacters = new ArrayList<>();
+        for (String person:people) {
+            listOfCharacters.add((PeopleDTO) Injector.injectDTO(httpToHttps(person)));
+        }
+        return listOfCharacters;
+    }
+
+    public List<FilmsDTO> getFilmsSpeciesAreIn() {
+        List<FilmsDTO> listOfFilms = new ArrayList<>();
+        for (String film:films) {
+            listOfFilms.add((FilmsDTO) Injector.injectDTO(httpToHttps(film)));
+        }
+        return listOfFilms;
+    }
 }

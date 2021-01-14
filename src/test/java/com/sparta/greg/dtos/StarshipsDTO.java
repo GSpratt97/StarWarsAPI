@@ -1,14 +1,15 @@
 package com.sparta.greg.dtos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.sparta.greg.injector.Injector;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -61,7 +62,7 @@ public class StarshipsDTO extends StarWarsDTO {
     @JsonProperty("starship_class")
     private String starshipClass;
     @JsonProperty("pilots")
-    private List<Object> pilots = null;
+    private List<String> pilots = null;
     @JsonProperty("films")
     private List<String> films = null;
     @JsonProperty("created")
@@ -78,19 +79,9 @@ public class StarshipsDTO extends StarWarsDTO {
         return name;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @JsonProperty("model")
     public String getModel() {
         return model;
-    }
-
-    @JsonProperty("model")
-    public void setModel(String model) {
-        this.model = model;
     }
 
     @JsonProperty("manufacturer")
@@ -98,19 +89,9 @@ public class StarshipsDTO extends StarWarsDTO {
         return manufacturer;
     }
 
-    @JsonProperty("manufacturer")
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
     @JsonProperty("cost_in_credits")
     public String getCostInCredits() {
         return costInCredits;
-    }
-
-    @JsonProperty("cost_in_credits")
-    public void setCostInCredits(String costInCredits) {
-        this.costInCredits = costInCredits;
     }
 
     @JsonProperty("length")
@@ -118,19 +99,9 @@ public class StarshipsDTO extends StarWarsDTO {
         return length;
     }
 
-    @JsonProperty("length")
-    public void setLength(String length) {
-        this.length = length;
-    }
-
     @JsonProperty("max_atmosphering_speed")
     public String getMaxAtmospheringSpeed() {
         return maxAtmospheringSpeed;
-    }
-
-    @JsonProperty("max_atmosphering_speed")
-    public void setMaxAtmospheringSpeed(String maxAtmospheringSpeed) {
-        this.maxAtmospheringSpeed = maxAtmospheringSpeed;
     }
 
     @JsonProperty("crew")
@@ -138,19 +109,9 @@ public class StarshipsDTO extends StarWarsDTO {
         return crew;
     }
 
-    @JsonProperty("crew")
-    public void setCrew(String crew) {
-        this.crew = crew;
-    }
-
     @JsonProperty("passengers")
     public String getPassengers() {
         return passengers;
-    }
-
-    @JsonProperty("passengers")
-    public void setPassengers(String passengers) {
-        this.passengers = passengers;
     }
 
     @JsonProperty("cargo_capacity")
@@ -158,19 +119,9 @@ public class StarshipsDTO extends StarWarsDTO {
         return cargoCapacity;
     }
 
-    @JsonProperty("cargo_capacity")
-    public void setCargoCapacity(String cargoCapacity) {
-        this.cargoCapacity = cargoCapacity;
-    }
-
     @JsonProperty("consumables")
     public String getConsumables() {
         return consumables;
-    }
-
-    @JsonProperty("consumables")
-    public void setConsumables(String consumables) {
-        this.consumables = consumables;
     }
 
     @JsonProperty("hyperdrive_rating")
@@ -178,19 +129,9 @@ public class StarshipsDTO extends StarWarsDTO {
         return hyperdriveRating;
     }
 
-    @JsonProperty("hyperdrive_rating")
-    public void setHyperdriveRating(String hyperdriveRating) {
-        this.hyperdriveRating = hyperdriveRating;
-    }
-
     @JsonProperty("MGLT")
     public String getMGLT() {
         return mGLT;
-    }
-
-    @JsonProperty("MGLT")
-    public void setMGLT(String mGLT) {
-        this.mGLT = mGLT;
     }
 
     @JsonProperty("starship_class")
@@ -198,19 +139,9 @@ public class StarshipsDTO extends StarWarsDTO {
         return starshipClass;
     }
 
-    @JsonProperty("starship_class")
-    public void setStarshipClass(String starshipClass) {
-        this.starshipClass = starshipClass;
-    }
-
     @JsonProperty("pilots")
-    public List<Object> getPilots() {
+    public List<String> getPilots() {
         return pilots;
-    }
-
-    @JsonProperty("pilots")
-    public void setPilots(List<Object> pilots) {
-        this.pilots = pilots;
     }
 
     @JsonProperty("films")
@@ -218,19 +149,9 @@ public class StarshipsDTO extends StarWarsDTO {
         return films;
     }
 
-    @JsonProperty("films")
-    public void setFilms(List<String> films) {
-        this.films = films;
-    }
-
     @JsonProperty("created")
     public String getCreated() {
         return created;
-    }
-
-    @JsonProperty("created")
-    public void setCreated(String created) {
-        this.created = created;
     }
 
     @JsonProperty("edited")
@@ -238,19 +159,9 @@ public class StarshipsDTO extends StarWarsDTO {
         return edited;
     }
 
-    @JsonProperty("edited")
-    public void setEdited(String edited) {
-        this.edited = edited;
-    }
-
     @JsonProperty("url")
     public String getUrl() {
-        return url;
-    }
-
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
+        return httpToHttps(url);
     }
 
     @JsonAnyGetter
@@ -258,9 +169,22 @@ public class StarshipsDTO extends StarWarsDTO {
         return this.additionalProperties;
     }
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    public List<PeopleDTO> getCharacterPilotsOfStarship() {
+        List<PeopleDTO> listOfPilots = new ArrayList<>();
+        for (String character:pilots) {
+            listOfPilots.add((PeopleDTO) Injector.injectDTO(httpToHttps(character)));
+        }
+        return listOfPilots;
     }
+
+    public List<FilmsDTO> getFilmsStarshipsAreIn() {
+        List<FilmsDTO> listOfFilms = new ArrayList<>();
+        for (String film:films) {
+            listOfFilms.add((FilmsDTO) Injector.injectDTO(httpToHttps(film)));
+        }
+        return listOfFilms;
+    }
+
+
 
 }

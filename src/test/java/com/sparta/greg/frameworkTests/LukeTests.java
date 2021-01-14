@@ -9,6 +9,8 @@ import org.junit.jupiter.api.*;
 public class LukeTests {
     PeopleDTO peopleDTO;
     private static final String PEOPLE = "people/";
+
+    // ID for Luke Skywalker = 1
     private static final String ID = "1/";
 
     @BeforeEach
@@ -64,19 +66,19 @@ public class LukeTests {
     @Test
     @DisplayName("Check Luke has two vehicles")
     void checkLukeHasTwoVehicles() {
-        for (VehiclesDTO vehicleList:peopleDTO.getVehiclesCharacterIsIn()) {
+        for (VehiclesDTO vehicleList:peopleDTO.getVehiclesCharacterUses()) {
             System.out.println(vehicleList.getName());
         }
-        Assertions.assertEquals(2, peopleDTO.getVehiclesCharacterIsIn().size());
+        Assertions.assertEquals(2, peopleDTO.getVehiclesCharacterUses().size());
     }
 
     @Test
     @DisplayName("Check Luke has two vehicles")
     void checkLukeHasStarships() {
-        for (StarshipsDTO starshipsDTO:peopleDTO.getStarshipsCharacterIsIn()) {
+        for (StarshipsDTO starshipsDTO:peopleDTO.getStarshipsCharacterUses()) {
             System.out.println(starshipsDTO.getName());
         }
-        Assertions.assertEquals(2, peopleDTO.getStarshipsCharacterIsIn().size());
+        Assertions.assertEquals(2, peopleDTO.getStarshipsCharacterUses().size());
     }
 
     @Test
@@ -86,5 +88,13 @@ public class LukeTests {
             System.out.println(speciesNames.getName());
         }
         Assertions.assertTrue(peopleDTO.getCharacterSpecies().size() <=1);
+    }
+
+    @Test
+    @DisplayName("Test returned url is correct string")
+    void testReturnedUrlIsCorrectString() {
+        System.out.println(peopleDTO.getUrl());
+        System.out.println(peopleDTO.getUrl().getClass());
+        Assertions.assertNotNull(peopleDTO.getUrl());
     }
 }

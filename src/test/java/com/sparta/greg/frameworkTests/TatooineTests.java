@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 public class TatooineTests {
     PlanetsDTO planetsDTO;
     private static final String PLANETS = "planets/";
+
+    // ID for Tatooine = 1
     private static String ID = "1/";
 
     @BeforeEach

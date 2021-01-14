@@ -13,40 +13,24 @@ public abstract class StarWarsDTO {
     private String created;
     @JsonProperty("edited")
     private String edited;
-    @JsonProperty("URL")
-    private String URL;
+//    @JsonProperty("URL")
+//    private String URL;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     public String getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
     public String getEdited() {
         return edited;
     }
 
-    public void setEdited(String edited) {
-        this.edited = edited;
-    }
-
-    public String getURL() {
-        return URL;
-    }
-
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
+//    public String getURL() {
+//        return httpToHttps(URL);
+//    }
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
-    }
-
-    public void setAdditionalProperties(Map<String, Object> additionalProperties) {
-        this.additionalProperties = additionalProperties;
     }
 
     public String httpToHttps(String urlString) {

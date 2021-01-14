@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 public class ANewHopeTests {
     FilmsDTO filmsDTO;
     private static final String FILMS = "films/";
+
+    // ID for A New Hope = 1
     private static String ID = "1/";
 
     @BeforeEach
