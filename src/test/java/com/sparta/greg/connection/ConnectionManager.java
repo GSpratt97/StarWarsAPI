@@ -27,7 +27,6 @@ public class ConnectionManager {
         try {
             httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             statusCode = httpResponse.statusCode();
-//            System.out.println(httpResponse.body());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

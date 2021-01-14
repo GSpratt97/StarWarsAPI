@@ -11,10 +11,6 @@ import java.net.http.HttpResponse;
 
 public class Injector {
     public static StarWarsDTO injectDTO(String url) {
-//        PeopleDTO peopleDTO = new PeopleDTO();
-//        PlanetsDTO planetsDTO = new PlanetsDTO();
-//        StarWarsDTO peopleDTO = new PeopleDTO();
-//        FactoryDTO factoryDTO = new FactoryDTO();
         StarWarsDTO starWarsDTO = FactoryDTO.starWarsFactory(url);
 
         if (url == null || url.equals("")) {
@@ -26,7 +22,7 @@ public class Injector {
 
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(url)).build();
-//
+
         try {
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             starWarsDTO = objectMapper.readValue(httpResponse.body(), starWarsDTO.getClass());
