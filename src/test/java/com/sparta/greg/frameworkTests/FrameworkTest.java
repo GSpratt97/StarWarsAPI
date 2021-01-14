@@ -9,12 +9,10 @@ import org.junit.jupiter.api.*;
 
 public class FrameworkTest {
 
-    PlanetsDTO planetsDTO;
     SpeciesDTO speciesDTO;
     StarshipsDTO starshipsDTO;
     VehiclesDTO vehiclesDTO;
 
-    private static final String PLANETS = "planets/";
     private static final String SPECIES = "species/";
     private static final String STARSHIPS = "starships/";
     private static final String VEHICLES = "vehicles/";
@@ -23,7 +21,6 @@ public class FrameworkTest {
 
     @BeforeEach
     void setup() {
-        planetsDTO = (PlanetsDTO) Injector.injectDTO(ConnectionManager.getConnection(PLANETS, ID));
         speciesDTO = (SpeciesDTO) Injector.injectDTO(ConnectionManager.getConnection(SPECIES, ID));
         starshipsDTO = (StarshipsDTO) Injector.injectDTO(ConnectionManager.getConnection(STARSHIPS, ID));
         vehiclesDTO = (VehiclesDTO) Injector.injectDTO(ConnectionManager.getConnection(VEHICLES, ID));
@@ -32,13 +29,6 @@ public class FrameworkTest {
     @Nested
     @DisplayName("Test all status codes are 200")
     class StatusCodesAreAll200 {
-
-
-        @Test
-        @DisplayName("Status code is 200")
-        void statusCodeIs200ForPlanets() {
-            Assertions.assertEquals(200, ConnectionManager.getStatusCode(PLANETS, ID));
-        }
 
         @Test
         @DisplayName("Status code is 200")

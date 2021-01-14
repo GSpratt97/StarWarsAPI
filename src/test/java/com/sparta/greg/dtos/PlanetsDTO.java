@@ -1,5 +1,6 @@
 package com.sparta.greg.dtos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.sparta.greg.injector.Injector;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -133,5 +135,21 @@ public class PlanetsDTO extends StarWarsDTO{
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
+    }
+
+    public List<PeopleDTO> getResidentsOfPlanet() {
+        List<PeopleDTO> listOfCharacters = new ArrayList<>();
+        for (String character:residents) {
+            listOfCharacters.add((PeopleDTO) Injector.injectDTO(httpToHttps(character)));
+        }
+        return listOfCharacters;
+    }
+
+    public List<FilmsDTO> getFilmsPlanetFeatured() {
+        List<FilmsDTO> listOfFilms = new ArrayList<>();
+        for (String film:films) {
+            listOfFilms.add((FilmsDTO) Injector.injectDTO(httpToHttps(film)));
+        }
+        return listOfFilms;
     }
 }
