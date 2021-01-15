@@ -16,7 +16,9 @@ public class FactoryDTO {
     private static final String ID = ".*[0-9]/";
 
     public static StarWarsDTO starWarsFactory(String url) {
-        if (Pattern.matches(BASE_URL+FILMS+ID, url)) {
+        if (Pattern.matches(BASE_URL+PEOPLE, url)) {
+            return new GeneralDTO();
+        } else if (Pattern.matches(BASE_URL+FILMS+ID, url)) {
             return new FilmsDTO();
         } else if (Pattern.matches(BASE_URL+PEOPLE+ID, url)) {
             return new PeopleDTO();
@@ -28,6 +30,18 @@ public class FactoryDTO {
             return new StarshipsDTO();
         } else if (Pattern.matches(BASE_URL+VEHICLES+ID, url)) {
             return new VehiclesDTO();
+//        } else if (Pattern.matches(BASE_URL+FILMS, url)) {
+//            return new FilmsDTO();
+//        } else if (Pattern.matches(BASE_URL+PEOPLE, url)) {
+//            return new GeneralDTO();
+//        } else if (Pattern.matches(BASE_URL+PLANETS, url)) {
+//            return new PlanetsDTO();
+//        }  else if (Pattern.matches(BASE_URL+SPECIES, url)) {
+//            return new SpeciesDTO();
+//        } else if (Pattern.matches(BASE_URL+STARSHIPS, url)) {
+//            return new StarshipsDTO();
+//        } else if (Pattern.matches(BASE_URL+VEHICLES, url)) {
+//            return new VehiclesDTO();
         } else {
             return null;
         }

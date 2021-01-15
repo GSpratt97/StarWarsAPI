@@ -12,20 +12,23 @@ import org.junit.jupiter.api.Test;
 
 public class ANewHopeTests {
     FilmsDTO filmsDTO;
+    private static final String BASE_URL = "https://swapi.dev/api/";
     private static final String FILMS = "films/";
-
-    // ID for A New Hope = 1
-    private static String ID = "1/";
+    private static String CompleteURL = "";
 
     @BeforeEach
     void setup() {
-        filmsDTO = (FilmsDTO) Injector.injectDTO(ConnectionManager.getConnection(FILMS, ID));
+        // ID for A New Hope = 1
+        String id = "1/";
+
+        CompleteURL = ConnectionManager.getConnection(BASE_URL, FILMS, id);
+        filmsDTO = (FilmsDTO) Injector.injectDTO(CompleteURL);
     }
 
     @Test
     @DisplayName("Status code is 200")
     void statusCodeIs200ForFilms() {
-        Assertions.assertEquals(200, ConnectionManager.getStatusCode(FILMS, ID));
+        Assertions.assertEquals(200, ConnectionManager.getStatusCode(CompleteURL));
     }
 
     @Test

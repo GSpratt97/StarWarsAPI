@@ -10,20 +10,23 @@ import org.junit.jupiter.api.Test;
 
 public class HumanTests {
     SpeciesDTO speciesDTO;
+    private static final String BASE_URL = "https://swapi.dev/api/";
     private static final String SPECIES = "species/";
-    
-    // ID for Human = 1
-    private static String ID = "1/";
+    private static String CompleteURL = "";
 
     @BeforeEach
     void setup() {
-        speciesDTO = (SpeciesDTO) Injector.injectDTO(ConnectionManager.getConnection(SPECIES, ID));
+        // ID for Human = 1
+        String id = "1/";
+
+        CompleteURL = ConnectionManager.getConnection(BASE_URL, SPECIES, id);
+        speciesDTO = (SpeciesDTO) Injector.injectDTO(CompleteURL);
     }
 
     @Test
     @DisplayName("Status code is 200")
     void statusCodeIs200ForSpecies() {
-        Assertions.assertEquals(200, ConnectionManager.getStatusCode(SPECIES, ID));
+        Assertions.assertEquals(200, ConnectionManager.getStatusCode(CompleteURL));
     }
 
     @Test

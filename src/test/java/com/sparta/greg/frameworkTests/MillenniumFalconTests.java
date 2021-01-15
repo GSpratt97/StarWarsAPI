@@ -8,23 +8,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
 public class MillenniumFalconTests {
     StarshipsDTO starshipsDTO;
+    private static final String BASE_URL = "https://swapi.dev/api/";
     private static final String STARSHIPS = "starships/";
-
-    // ID for Millenium Falcon = 10
-    private static String ID = "10/";
+    private static String CompleteURL = "";
 
     @BeforeEach
     void setup() {
-        starshipsDTO = (StarshipsDTO) Injector.injectDTO(ConnectionManager.getConnection(STARSHIPS, ID));
+        // ID for Millenium Falcon = 10
+        String id = "10/";
+
+        CompleteURL = ConnectionManager.getConnection(BASE_URL, STARSHIPS, id);
+        starshipsDTO = (StarshipsDTO) Injector.injectDTO(CompleteURL);
     }
 
     @Test
     @DisplayName("Status code is 200")
     void statusCodeIs200ForStarships() {
-        Assertions.assertEquals(200, ConnectionManager.getStatusCode(STARSHIPS, ID));
+        Assertions.assertEquals(200, ConnectionManager.getStatusCode(CompleteURL));
     }
 
     @Test

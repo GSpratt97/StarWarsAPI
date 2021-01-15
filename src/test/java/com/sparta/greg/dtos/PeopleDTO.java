@@ -31,6 +31,7 @@ import com.sparta.greg.injector.Injector;
         "url"
 })
 public class PeopleDTO extends StarWarsDTO{
+
     public PeopleDTO(){}
 
     @JsonProperty("name")
@@ -65,6 +66,8 @@ public class PeopleDTO extends StarWarsDTO{
     private String edited;
     @JsonProperty("url")
     private String url;
+//    @JsonProperty("count")
+//    private String count;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -190,10 +193,4 @@ public class PeopleDTO extends StarWarsDTO{
         }
         return listOfStarships;
     }
-
-
-
-
-
-
 }

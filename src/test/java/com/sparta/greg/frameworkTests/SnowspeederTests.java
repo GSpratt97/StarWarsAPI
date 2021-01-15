@@ -10,20 +10,23 @@ import org.junit.jupiter.api.Test;
 
 public class SnowspeederTests {
     VehiclesDTO vehiclesDTO;
+    private static final String BASE_URL = "https://swapi.dev/api/";
     private static final String VEHICLES = "vehicles/";
-
-    // ID for Snowspeeder = 14
-    private static String ID = "14/";
+    private static String CompleteURL = "";
 
     @BeforeEach
     void setup() {
-        vehiclesDTO = (VehiclesDTO) Injector.injectDTO(ConnectionManager.getConnection(VEHICLES, ID));
+        // ID for Snowspeeder = 14
+        String id = "14/";
+
+        CompleteURL = ConnectionManager.getConnection(BASE_URL, VEHICLES, id);
+        vehiclesDTO = (VehiclesDTO) Injector.injectDTO(CompleteURL);
     }
 
     @Test
     @DisplayName("Status code is 200")
     void statusCodeIs200ForVehicles() {
-        Assertions.assertEquals(200, ConnectionManager.getStatusCode(VEHICLES, ID));
+        Assertions.assertEquals(200, ConnectionManager.getStatusCode(CompleteURL));
     }
 
     @Test
