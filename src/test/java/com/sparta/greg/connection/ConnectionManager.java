@@ -28,7 +28,5 @@ public class ConnectionManager {
         return statusCode;
     }
 
-    public static HttpResponse<String> getHttpResponse() {
-        return httpResponse;
-    }
+
 }

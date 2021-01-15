@@ -4,6 +4,7 @@ import com.sparta.greg.connection.ConnectionManager;
 import com.sparta.greg.dtos.*;
 import com.sparta.greg.injector.Injector;
 import org.junit.jupiter.api.*;
+import java.lang.Character;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class ExampleTests {
 
         CompleteURL = ConnectionManager.getConnection(BASE_URL, PEOPLE, id);
         peopleDTO = (PeopleDTO) Injector.injectDTO(CompleteURL);
+        System.out.println("Hello There!");
     }
 
     @Test
@@ -98,8 +100,8 @@ public class ExampleTests {
     }
 
     @Test
-    @DisplayName("Test returned url is correct string")
-    void testReturnedUrlIsCorrectString() {
+    @DisplayName("Test returned url is not null")
+    void testReturnedUrlIsNotNull() {
         System.out.println(peopleDTO.getUrl());
         System.out.println(peopleDTO.getUrl().getClass());
         Assertions.assertNotNull(peopleDTO.getUrl());
@@ -123,7 +125,10 @@ public class ExampleTests {
 //        CompleteURL = ConnectionManager.getConnection(BASE_URL, PEOPLE, id);
 //        System.out.println(CompleteURL);
 //        generalDTO = (GeneralDTO) Injector.injectDTO(CompleteURL);
-//
+//        System.out.println(generalDTO.getCount());
+//        System.out.println(generalDTO.getNext());
+//        System.out.println(Injector.getHttpResponse().body());
+
 //        System.out.println(generalDTO.getCount());
         for (int i = 1; i <= 82; i++) {
             id = i + "/";
@@ -144,6 +149,12 @@ public class ExampleTests {
         }
         System.out.println(allCharacters.toString());
         Assertions.assertEquals(81, allCharacters.size());
+    }
+
+    @Test
+    @DisplayName("Check Luke begins with capital letter")
+    void checkLukeBeginsWithCapitalLetter() {
+        Assertions.assertTrue(Character.isUpperCase(peopleDTO.getName().charAt(0)));
     }
 
 

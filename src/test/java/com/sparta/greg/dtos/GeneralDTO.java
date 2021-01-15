@@ -18,21 +18,21 @@ public class GeneralDTO extends StarWarsDTO {
     public GeneralDTO(){}
 
     @JsonProperty("count")
-    protected String count;
+    protected int count;
     @JsonProperty("next")
     private String next;
     @JsonProperty("previous")
     private String previous;
     @JsonProperty("results")
     private List<String> results;
-    @JsonProperty("created")
-    private String created;
-    @JsonProperty("edited")
-    private String edited;
-    @JsonProperty("detail")
-    private String detail;
+//    @JsonProperty("created")
+//    private String created;
+//    @JsonProperty("edited")
+//    private String edited;
+//    @JsonProperty("detail")
+//    private String detail;
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
@@ -48,15 +48,15 @@ public class GeneralDTO extends StarWarsDTO {
         return results;
     }
 
-    public String getCreated() {
-        return created;
-    }
-
-    public String getEdited() {
-        return edited;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
+//    public String getCreated() {
+//        return created;
+//    }
+//
+//    public String getEdited() {
+//        return edited;
+//    }
+//
+//    public String getDetail() {
+//        return detail;
+//    }
 }
