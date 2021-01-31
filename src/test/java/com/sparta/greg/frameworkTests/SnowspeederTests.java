@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class SnowspeederTests {
+class SnowspeederTests {
     VehiclesDTO vehiclesDTO;
     private static final String BASE_URL = "https://swapi.dev/api/";
     private static final String VEHICLES = "vehicles/";

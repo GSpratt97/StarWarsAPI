@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ANewHopeTests {
+class ANewHopeTests {
     FilmsDTO filmsDTO;
     private static final String BASE_URL = "https://swapi.dev/api/";
     private static final String FILMS = "films/";

@@ -8,7 +8,7 @@ import java.lang.Character;
 
 import java.util.ArrayList;
 
-public class ExampleTests {
+class ExampleTests {
     PeopleDTO peopleDTO;
     private static final String BASE_URL = "https://swapi.dev/api/";
     private static final String PEOPLE = "people/";
@@ -70,6 +70,7 @@ public class ExampleTests {
         for (FilmsDTO filmList:peopleDTO.getFilmsCharacterIsIn()) {
             System.out.println(filmList.getTitle());
         }
+        Assertions.assertEquals(4, peopleDTO.getFilmsCharacterIsIn().size());
     }
 
     @Test

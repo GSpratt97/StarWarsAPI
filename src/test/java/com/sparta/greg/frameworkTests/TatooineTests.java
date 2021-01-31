@@ -7,7 +7,7 @@ import com.sparta.greg.dtos.PlanetsDTO;
 import com.sparta.greg.injector.Injector;
 import org.junit.jupiter.api.*;
 
-public class TatooineTests {
+class TatooineTests {
     PlanetsDTO planetsDTO;
     private static final String BASE_URL = "https://swapi.dev/api/";
     private static final String PLANETS = "planets/";
